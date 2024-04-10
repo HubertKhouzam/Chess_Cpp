@@ -1,3 +1,6 @@
 #include "pieces.h"
 
-Pieces::Pieces() {}
+PiecesAbs::PiecesAbs(Color color, Position position) {
+    pieceColor_ = color;
+    piecePosition_ = position;
+}
