@@ -14,9 +14,9 @@ find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
 
 set(PROJECT_SOURCES
         main.cpp
-        mainwindow.cpp
-        mainwindow.h
-        mainwindow.ui
+
+
+
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
@@ -26,6 +26,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         pieces.h pieces.cpp
         Color.h
         position.h
+        chessboardWindow.h chessboardWindow.cpp
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET Projet_echec_test APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
