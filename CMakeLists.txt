@@ -27,6 +27,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         Color.h
         position.h
         chessboardWindow.h chessboardWindow.cpp
+        chessboardset.h chessboardset.cpp
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET Projet_echec_test APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR

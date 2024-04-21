@@ -1,14 +1,15 @@
-#ifndef PIECES_H
-#define PIECES_H
-
+#pragma once
 #include "position.h"
-#include "color.h"
+#include "Color.h"
 #include <string>
+
+namespace piece {
 
 class PiecesAbs
 {
 public:
     PiecesAbs() = default;
+    PiecesAbs(Color color, Position position);
     //PieceAbs() = (Color color, Position position)
     virtual ~PiecesAbs();
 
@@ -16,7 +17,7 @@ public:
     Position getPiecePosition() const;
     void setPosition(Position coordonates);
     const virtual std::string getPiece() = 0 ;
-    bool isMovementAcepted (Position coordonates);
+    bool isMovementAccepted (Position coordonates);
     bool isCaptured = false;
 
 private:
@@ -24,5 +25,5 @@ private:
     Color pieceColor_;
     Position piecePosition_;
 };
+}
 
-#endif // PIECES_H
