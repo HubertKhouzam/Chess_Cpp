@@ -10,7 +10,6 @@ class PiecesAbs
 public:
     PiecesAbs() = default;
     PiecesAbs(Color color, Position position);
-    //PieceAbs() = (Color color, Position position)
     virtual ~PiecesAbs();
 
     Color getPieceColor();
@@ -21,7 +20,7 @@ public:
     bool isCaptured = false;
 
 private:
-    virtual bool acceptedMovement(Position coordobates)= 0;
+    virtual bool acceptedMovement(Position caseArrive)= 0;
     Color pieceColor_;
     Position piecePosition_;
 };

@@ -31,6 +31,8 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         board.h board.cpp
         square.h square.cpp
         piecevisual.h piecevisual.cpp
+        raiMouvement.h raiMouvement.cpp
+        king.h king.cpp
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET Projet_echec_test APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR

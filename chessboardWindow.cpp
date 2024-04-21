@@ -91,7 +91,6 @@ window::ChessBoard::ChessBoard(QWidget *parent) : QMainWindow(parent)
         blackKnight->setIcon(blackKnightPng);
         blackKnight->setIconSize(QSize(80, 80));
         blackKnight->setFixedSize(100, 100);
-        // blackBishop->setText("Black Bishop");
         connect(blackKnight, &QPushButton::clicked, this, [this, blackKnight]()
                 { pieceSelected(blackKnight); });
 
@@ -102,7 +101,6 @@ window::ChessBoard::ChessBoard(QWidget *parent) : QMainWindow(parent)
         connect(blackRook, &QPushButton::clicked, this, [this, blackRook]()
                 { pieceSelected(blackRook); });
         auto blackKing = new QPushButton();
-        // blackKing->setText("Black Rook");
         blackKing->setIcon(blackKingPng);
         blackKing->setIconSize(QSize(80, 80));
         blackKing->setFixedSize(100, 100);
