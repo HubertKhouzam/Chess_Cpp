@@ -1,5 +1,4 @@
-#ifndef CHESSBOARDWINDOW_H
-#define CHESSBOARDWINDOW_H
+#pragma once
 #include "chessboardset.h"
 #pragma warning(push, 0)
 #include <QMainWindow>
@@ -44,5 +43,4 @@ private:
     const QIcon blackKingPng = QIcon("./img/blackKing.png");
 };
 
-#endif // CHESSBOARDWINDOW_H
 }
