@@ -39,7 +39,7 @@ private:
     const QIcon whiteRookPng = QIcon ("./img/whiteRook.png");
     const QIcon whiteKingPng = QIcon("./img/whiteKing.png");
     const QIcon blackKnightPng = QIcon("./img/blackKnight.png");
-    const QIcon blackRookPng = QIcon("./img/blackRook.png");
+    const QIcon blackRookPng = QIcon("./img/blackRookV2.png");
     const QIcon blackKingPng = QIcon("./img/blackKing.png");
 };
 

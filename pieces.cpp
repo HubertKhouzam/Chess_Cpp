@@ -25,3 +25,4 @@ void piece::PiecesAbs::setPosition(Position coordo)
     piecePosition_ = coordo;
 
 }
+
