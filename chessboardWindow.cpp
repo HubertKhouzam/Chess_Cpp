@@ -53,7 +53,7 @@ window::ChessBoard::ChessBoard(QWidget *parent) : QMainWindow(parent)
                 }
                 else
                 {
-                    button->setStyleSheet("background-color:black");
+                    button->setStyleSheet("background-color:grey");
                 }
                 QObject::connect(button, &QPushButton::clicked, this, [this, i, j, button]()
                                  { buttonSelected(i, j, button); });
@@ -61,64 +61,11 @@ window::ChessBoard::ChessBoard(QWidget *parent) : QMainWindow(parent)
             }
         }
 
-        QHBoxLayout *whitePieceLayout = new QHBoxLayout;
-        QHBoxLayout *blackPieceLayout = new QHBoxLayout;
-
-        auto whiteKnight = new QPushButton();
-        whiteKnight->setIcon(whiteKnightPng);
-        whiteKnight->setIconSize(QSize(80, 80));
-        whiteKnight->setFixedSize(100, 100);
-        connect(whiteKnight, &QPushButton::clicked, this, [this, whiteKnight]()
-                { pieceSelected(whiteKnight); });
-        auto whiteRook = new QPushButton();
-        whiteRook->setIcon(whiteRookPng);
-        whiteRook->setIconSize(QSize(80, 80));
-        whiteRook->setFixedSize(100, 100);
-        connect(whiteRook, &QPushButton::clicked, this, [this, whiteRook]()
-                { pieceSelected(whiteRook); });
-        auto whiteKing = new QPushButton();
-        whiteKing->setIcon(whiteKingPng);
-        whiteKing->setIconSize(QSize(100, 80));
-        whiteKing->setFixedSize(100, 100);
-        connect(whiteKing, &QPushButton::clicked, this, [this, whiteKing]()
-                { pieceSelected(whiteKing); });
-
-        whitePieceLayout->addWidget(whiteKnight);
-        whitePieceLayout->addWidget(whiteRook);
-        whitePieceLayout->addWidget(whiteKing);
-
-        auto blackKnight = new QPushButton();
-        blackKnight->setIcon(blackKnightPng);
-        blackKnight->setIconSize(QSize(80, 80));
-        blackKnight->setFixedSize(100, 100);
-        connect(blackKnight, &QPushButton::clicked, this, [this, blackKnight]()
-                { pieceSelected(blackKnight); });
-
-        auto blackRook = new QPushButton();
-        blackRook->setIcon(blackRookPng);
-        blackRook->setIconSize(QSize(80, 80));
-        blackRook->setFixedSize(100, 100);
-        connect(blackRook, &QPushButton::clicked, this, [this, blackRook]()
-                { pieceSelected(blackRook); });
-        auto blackKing = new QPushButton();
-        blackKing->setIcon(blackKingPng);
-        blackKing->setIconSize(QSize(80, 80));
-        blackKing->setFixedSize(100, 100);
-        connect(blackKing, &QPushButton::clicked, this, [this, blackKing]()
-                { pieceSelected(blackKing); });
-
-        blackPieceLayout->addWidget(blackKnight);
-        blackPieceLayout->addWidget(blackRook);
-        blackPieceLayout->addWidget(blackKing);
 
         layoutPrincipal->addLayout(layout);
-        layoutPrincipal->addLayout(whitePieceLayout);
-        layoutPrincipal->addLayout(blackPieceLayout);
-
-        layoutPrincipal->setSpacing(5);
 
         widgetPrincipal->setLayout(layoutPrincipal);
-        widgetPrincipal->setFixedSize(850, 950);
+        widgetPrincipal->setFixedSize(850, 850);
 
         setCentralWidget(widgetPrincipal);
         setWindowTitle("Echiquier");
