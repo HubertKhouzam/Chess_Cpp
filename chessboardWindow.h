@@ -35,12 +35,12 @@ private:
     int clickBoutonPiece = 0;
     int clickBoutonCase = 0;
 
-    const QIcon whiteKnightPng = QIcon("./img/whiteKnight.png");
-    const QIcon whiteRookPng = QIcon ("./img/whiteRook.png");
-    const QIcon whiteKingPng = QIcon("./img/whiteKing.png");
-    const QIcon blackKnightPng = QIcon("./img/blackKnight.png");
-    const QIcon blackRookPng = QIcon("./img/blackRookV2.png");
-    const QIcon blackKingPng = QIcon("./img/blackKing.png");
+    const QIcon whiteKnightPng = QIcon(":/img/W_KNIGHT.png");
+    const QIcon whiteRookPng = QIcon (":/img/W_ROOK.png");
+    const QIcon whiteKingPng = QIcon(":/img/W_KING.png");
+    const QIcon blackKnightPng = QIcon(":/img/B_KNIGHT.png");
+    const QIcon blackRookPng = QIcon(":/img/B_ROOK.png");
+    const QIcon blackKingPng = QIcon(":/img/B_KING.png");
 };
 
 }
