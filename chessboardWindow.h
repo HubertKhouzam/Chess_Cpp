@@ -29,8 +29,8 @@ private:
 
 
     Position position_;
-    ChessBoardSet chessBoard[8][8];
-    QPushButton* previousClickedSquared = nullptr;
+    QPushButton** chessBoard;
+    QPushButton* previousClickedSquare = nullptr;
     QIcon icone_;
     int clickBoutonPiece = 0;
     int clickBoutonCase = 0;

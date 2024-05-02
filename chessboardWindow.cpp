@@ -29,101 +29,66 @@ QPushButton *window::ChessBoard::newButton(int i, int j)
 }
 
 window::ChessBoard::ChessBoard(QWidget *parent) : QMainWindow(parent)
-// ui(new Ui::ChessBoard)
 {
-    // Si on objet n'a pas encore de parent on lui met "this" comme parent en attendant, si possible, pour s'assurer que tous les pointeurs sont gérés par un delete automatique en tout temps sans utiliser de unique_ptr.
-
     auto widgetPrincipal = new QWidget(this);
-    auto layoutPrincipal = new QVBoxLayout(widgetPrincipal); // Donner un parent à un layout est comme un setLayout.
+    auto layoutPrincipal = new QVBoxLayout(widgetPrincipal);
 
-    // Version avec setProperty:
-    {
-        auto layout = new QGridLayout();
-        layoutPrincipal->addLayout(layout);
+    auto layout = new QGridLayout();
+    layout->setSpacing(0); // Réduit l'espace entre les boutons à 0
+    layoutPrincipal->addLayout(layout);
 
-        for (int i = 0; i < 8; i++)
-        {
-            for (int j = 0; j < 8; j++)
-            {
-                auto button = newButton(i, j);
-                // On donne un nom à la propriété, et on lui donne une valeur QVariant (comme dans les notes de cours) d'un type quelconque (doit enregistrer le type avec Q_DECLARE_METATYPE(LeType) si ce n'est pas un type déjà connu de Qt).
-                if ((i + j) % 2 == 0)
-                {
-                    button->setStyleSheet("background-color:white");
-                }
-                else
-                {
-                    button->setStyleSheet("background-color:grey");
-                }
-                QObject::connect(button, &QPushButton::clicked, this, [this, i, j, button]()
-                                 { buttonSelected(i, j, button); });
-                layout->addWidget(button, i, j);
-            }
-        }
-
-
-        layoutPrincipal->addLayout(layout);
-
-        widgetPrincipal->setLayout(layoutPrincipal);
-        widgetPrincipal->setFixedSize(850, 850);
-
-        setCentralWidget(widgetPrincipal);
-        setWindowTitle("Echiquier");
-
-        QAction *exit = new QAction(tr("E&xit"), this);
-        // On connecte le clic sur ce bouton avec l'action de clore le programme
-        connect(exit, SIGNAL(triggered()), this, SLOT(close()));
-
-
-        QMenu *menuMenu = menuBar()->addMenu(tr("&Menu"));
-        // Dans lequel on ajoute notre bouton 'Exit'
-        menuMenu->addAction(exit);
+    chessBoard = new QPushButton*[8];
+    for (int i = 0; i < 8; i++) {
+        chessBoard[i] = new QPushButton[8];
     }
 
+    for (int i = 0; i < 8; i++) {
+        for (int j = 0; j < 8; j++) {
+            QPushButton* button = &chessBoard[i][j];
+            button->setStyleSheet((i + j) % 2 == 0 ? "background-color: white;" : "background-color: grey;");
+            QObject::connect(button, &QPushButton::clicked, this, [this, i, j, button]() {
+                buttonSelected(i, j, button);
+            });
+            layout->addWidget(button, i, j);
+            button->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);  // Permet aux boutons de s'adapter à la taille disponible
+        }
+    }
+
+    chessBoard[3][6].setIcon(whiteKingPng);
+    chessBoard[3][6].setIconSize(QSize(80, 80));
+
+
+    widgetPrincipal->setLayout(layoutPrincipal);
     setCentralWidget(widgetPrincipal);
-    setWindowTitle("Chess");
+    setWindowTitle("Echiquier");
+
+    QAction *exit = new QAction(tr("E&xit"), this);
+    // On connecte le clic sur ce bouton avec l'action de clore le programme
+    connect(exit, SIGNAL(triggered()), this, SLOT(close()));
+
+
+    QMenu *menuMenu = menuBar()->addMenu(tr("&Menu"));
+    // Dans lequel on ajoute notre bouton 'Exit'
+    menuMenu->addAction(exit);
 }
 
 Position window::ChessBoard::buttonSelected(int x_, int y_, QPushButton *button)
 {
-    Position pos;
-    pos.x = x_;
-    pos.y = y_;
+    Position pos {x_, y_};
 
-    //std::cout << pos.x << pos.y << std::endl;
-    clickBoutonCase++;
-    if (clickBoutonCase == 1 && clickBoutonPiece == 1)
-    {
+    if (clickBoutonCase == 1 && button->icon().isNull()) { // a changer condition
+
+        previousClickedSquare->setIcon(QIcon());
         button->setIcon(icone_);
-        button->setIconSize(QSize(80, 80));
+        button->setIconSize(QSize(80,80));
+        previousClickedSquare = nullptr;
         clickBoutonCase = 0;
-        clickBoutonPiece = 0;
+    } else if (!button->icon().isNull()) {
+        icone_ = button->icon();
+        previousClickedSquare = button;
+        clickBoutonCase = 1;
     }
-    else if (clickBoutonCase == 1)
-    {
 
-        if (button->text() == "")
-        {
-            clickBoutonCase = 0;
-        }
-        else
-        {
-            icone_ = button->icon();
-            previousClickedSquared = button;
-        }
-    }
-    else if (clickBoutonCase == 2)
-    {
-
-        if (previousClickedSquared != button)
-        {
-            button->setIcon(icone_);
-            previousClickedSquared->setIcon(QIcon());
-        }
-
-        clickBoutonCase = 0;
-        previousClickedSquared = nullptr;
-    }
     return pos;
 }
 
