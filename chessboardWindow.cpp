@@ -209,9 +209,7 @@ Position window::ChessBoard::buttonSelected(int x_, int y_, QPushButton *button)
     //gameBoard_.getSquare(previousPosition)
 
     if (clickBoutonCase == 1 && button->icon().isNull()) { // a changer condition
-        std::cout<<"yoho"<<std::endl;
         if (gameBoard_.isMovementAccepted(previousPosition,pos)){
-            std::cout<<"yoho"<<std::endl;
             previousClickedSquare->setIcon(QIcon());  //second click, drop piece
             button->setIcon(icone_);
             button->setIconSize(QSize(80,80));
