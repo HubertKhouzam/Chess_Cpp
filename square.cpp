@@ -50,6 +50,6 @@ PiecesAbs* Square::getPieceSquare()
 
 void Square::setUnoccupiedSquare()
 {
-    this->piece_ = nullptr;
+    piece_ = nullptr;
     isOccupied_ = false;
 }

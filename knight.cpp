@@ -21,7 +21,7 @@ bool Knight::acceptedMovement(Position coordo)
             ((coordo.y == getPiecePosition().y - 1) && (coordo.x == getPiecePosition().x + 2))  ||
             ((coordo.y == getPiecePosition().y - 1) && (coordo.x == getPiecePosition().x - 2))  ||
             ((coordo.y == getPiecePosition().y - 2) && (coordo.x == getPiecePosition().x + 1))  ||
-            ((coordo.y == getPiecePosition().y - 2) && (coordo.x == getPiecePosition().x + 1))
+            ((coordo.y == getPiecePosition().y - 2) && (coordo.x == getPiecePosition().x - 1))
             )
         {
             return true;

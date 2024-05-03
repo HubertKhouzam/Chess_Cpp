@@ -36,6 +36,19 @@ piece::PiecesAbs* Board::getPiece(Position pieceLocationBoard) {
     return nullptr;
 }
 
+void Board::changeTurn(){
+    playerTurn_ = playerTurn_ == Color::White ?  Color::Black : Color::White;
+}
+
+
+void Board::updateBoard(Position depart, Position dest){
+    Square* destination = getSquare(dest);
+    PiecesAbs* initial = getSquare(depart)->getPieceSquare();
+    destination->setUnoccupiedSquare();
+    destination->setPieceSquare(initial);
+    getSquare(depart)->setUnoccupiedSquare();
+}
+
 bool Board::isMovementAccepted(Position initial, Position destination) {
     PiecesAbs* pieceMoving = getPiece(initial);
     if (!pieceMoving) {
@@ -43,9 +56,14 @@ bool Board::isMovementAccepted(Position initial, Position destination) {
         return false;
     }
 
+    if(pieceMoving->getPieceColor() != playerTurn_){
+        std::cout << "Not your turn" << std::endl;
+        return false;
+    }
+
     PiecesAbs* pieceDestination = getPiece(destination);
     // Check if the destination square has a piece of the same color
-    if (pieceDestination && pieceDestination->getPieceType() == pieceMoving->getPieceType()) {
+    if (pieceDestination && pieceDestination->getPieceColor() == pieceMoving->getPieceColor()) {
         std::cout << "Cannot capture your own piece." << std::endl;
         return false;
     }
@@ -53,7 +71,8 @@ bool Board::isMovementAccepted(Position initial, Position destination) {
     // Use the type-specific acceptedMovement method
     if (pieceMoving->acceptedMovement(destination)) {
         std::cout << "Movement is valid." << std::endl;
-        // Optionally update board state here if the move is made
+        updateBoard(initial,destination);
+        changeTurn();
         return true;
     } else {
         std::cout << "Movement is not valid according to the piece's rules." << std::endl;

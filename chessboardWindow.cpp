@@ -208,7 +208,7 @@ Position window::ChessBoard::buttonSelected(int x_, int y_, QPushButton *button)
 
     //gameBoard_.getSquare(previousPosition)
 
-    if (clickBoutonCase == 1 && button->icon().isNull()) { // a changer condition
+    if (clickBoutonCase == 1 ) { // a changer condition
         if (gameBoard_.isMovementAccepted(previousPosition,pos)){
             previousClickedSquare->setIcon(QIcon());  //second click, drop piece
             button->setIcon(icone_);
