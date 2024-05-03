@@ -8,7 +8,7 @@ public:
     virtual ~Board() = default;
     bool isMovementAccepted(Position initial, Position destination);
     piece::PiecesAbs* getPiece(Position pieceLocationBoard);
-    std::unique_ptr<Square>* getSquare(Position pos);
+    Square* getSquare(Position pos);
 
 private:
 

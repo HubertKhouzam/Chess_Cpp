@@ -16,7 +16,6 @@ public:
     Color getPieceColor();
     Position getPiecePosition() const;
     void setPosition(Position coordonates);
-    const virtual std::string getPiece() = 0 ;
     bool isMovementAccepted (Position coordonates);
     bool isCaptured = false;
     virtual bool acceptedMovement(Position caseArrive)= 0;

@@ -1,4 +1,5 @@
 #include "chessboardWindow.h"
+#include "TypePiece.h"
 #pragma warning(push, 0)
 #include <QGridLayout>
 #include <QPushButton>
@@ -60,54 +61,83 @@ window::ChessBoard::ChessBoard(const std::string &position, QWidget *parent) : Q
     //whitePiece
         chessBoard[7][7].setIcon(whiteRookPng);
         chessBoard[7][7].setIconSize(QSize(80,80));
+        gameBoard_.getSquare({7,7})->setPieceSquare(PieceType::Rook,Color::White);
 
         chessBoard[7][0].setIcon(whiteRookPng);
         chessBoard[7][0].setIconSize(QSize(80,80));
+        gameBoard_.getSquare({7,0})->setPieceSquare(PieceType::Rook,Color::White);
+
 
         chessBoard[7][4].setIcon(whiteKingPng);
         chessBoard[7][4].setIconSize(QSize(80,80));
+        gameBoard_.getSquare({7,4})->setPieceSquare(PieceType::King,Color::White);
+
 
         chessBoard[7][6].setIcon(whiteKnightPng);
         chessBoard[7][6].setIconSize(QSize(80,80));
+        gameBoard_.getSquare({7,6})->setPieceSquare(PieceType::Knight,Color::White);
+
 
         chessBoard[7][1].setIcon(whiteKnightPng);
         chessBoard[7][1].setIconSize(QSize(80,80));
+        gameBoard_.getSquare({7,1})->setPieceSquare(PieceType::Knight,Color::White);
+
 
     //BlackPiece
         chessBoard[0][7].setIcon(blackRookPng);
         chessBoard[0][7].setIconSize(QSize(80,80));
+        gameBoard_.getSquare({0,7})->setPieceSquare(PieceType::Rook,Color::Black);
+
 
         chessBoard[0][0].setIcon(blackRookPng);
         chessBoard[0][0].setIconSize(QSize(80,80));
+        gameBoard_.getSquare({0,0})->setPieceSquare(PieceType::Rook,Color::Black);
+
 
         chessBoard[0][4].setIcon(blackKingPng);
         chessBoard[0][4].setIconSize(QSize(80,80));
+        gameBoard_.getSquare({0,4})->setPieceSquare(PieceType::King,Color::Black);
+
 
         chessBoard[0][6].setIcon(blackKnightPng);
         chessBoard[0][6].setIconSize(QSize(80,80));
+        gameBoard_.getSquare({0,6})->setPieceSquare(PieceType::Knight,Color::Black);
+
 
         chessBoard[0][1].setIcon(blackKnightPng);
         chessBoard[0][1].setIconSize(QSize(80,80));
+        gameBoard_.getSquare({0,1})->setPieceSquare(PieceType::Knight,Color::Black);
+
     }
     else if (position=="Position 2"){
         //whitePiece
         chessBoard[2][3].setIcon(whiteRookPng);
         chessBoard[2][3].setIconSize(QSize(80,80));
+        gameBoard_.getSquare({2,3})->setPieceSquare(PieceType::Rook,Color::White);
+
 
         chessBoard[2][4].setIcon(whiteKingPng);
         chessBoard[2][4].setIconSize(QSize(80,80));
+        gameBoard_.getSquare({2,4})->setPieceSquare(PieceType::King,Color::White);
+
 
         chessBoard[3][3].setIcon(whiteKnightPng);
         chessBoard[3][3].setIconSize(QSize(80,80));
+        gameBoard_.getSquare({3,3})->setPieceSquare(PieceType::Knight,Color::White);
+
 
 
         //BlackPiece
 
         chessBoard[5][5].setIcon(blackKingPng);
         chessBoard[5][5].setIconSize(QSize(80,80));
+        gameBoard_.getSquare({5,5})->setPieceSquare(PieceType::King,Color::Black);
+
 
         chessBoard[4][4].setIcon(blackKnightPng);
         chessBoard[4][4].setIconSize(QSize(80,80));
+        gameBoard_.getSquare({4,4})->setPieceSquare(PieceType::Knight,Color::Black);
+
     }
 
     else if (position=="Position 3"){
@@ -115,29 +145,45 @@ window::ChessBoard::ChessBoard(const std::string &position, QWidget *parent) : Q
         //whitePiece
         chessBoard[2][3].setIcon(whiteKnightPng);
         chessBoard[2][3].setIconSize(QSize(80,80));
+        gameBoard_.getSquare({2,3})->setPieceSquare(PieceType::Knight,Color::White);
+
 
         chessBoard[2][4].setIcon(whiteKingPng);
         chessBoard[2][4].setIconSize(QSize(80,80));
+        gameBoard_.getSquare({2,4})->setPieceSquare(PieceType::King,Color::White);
+
 
         chessBoard[3][4].setIcon(whiteKnightPng);
         chessBoard[3][4].setIconSize(QSize(80,80));
+        gameBoard_.getSquare({3,4})->setPieceSquare(PieceType::Knight,Color::White);
+
 
         chessBoard[1][3].setIcon(whiteKnightPng);
         chessBoard[1][3].setIconSize(QSize(80,80));
+        gameBoard_.getSquare({1,3})->setPieceSquare(PieceType::Knight,Color::White);
+
 
         chessBoard[3][7].setIcon(whiteKnightPng);
         chessBoard[3][7].setIconSize(QSize(80,80));
+        gameBoard_.getSquare({3,7})->setPieceSquare(PieceType::Knight,Color::White);
+
 
         chessBoard[3][5].setIcon(whiteKnightPng);
         chessBoard[3][5].setIconSize(QSize(80,80));
+        gameBoard_.getSquare({3,5})->setPieceSquare(PieceType::Knight,Color::White);
+
 
         //BlackPiece
 
         chessBoard[0][0].setIcon(blackKingPng);
         chessBoard[0][0].setIconSize(QSize(80,80));
+        gameBoard_.getSquare({0,0})->setPieceSquare(PieceType::King,Color::Black);
+
 
         chessBoard[4][4].setIcon(blackRookPng);
         chessBoard[4][4].setIconSize(QSize(80,80));
+        gameBoard_.getSquare({4,4})->setPieceSquare(PieceType::Rook,Color::Black);
+
 
     }
 

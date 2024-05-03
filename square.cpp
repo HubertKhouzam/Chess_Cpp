@@ -1,4 +1,8 @@
 #include "square.h"
+#include "king.h"
+#include "knight.h"
+#include "rook.h"
+
 
 Square::~Square(){
 }
@@ -21,6 +25,24 @@ void Square::setPieceSquare(PiecesAbs* piece)
     isOccupied_ = true;
     piece->setPosition(this->getPosition());
 };
+
+void Square::setPieceSquare(PieceType piece, Color color){
+    if(piece == PieceType::King){
+        King king = King(color,position_);
+        this->piece_ = &king;
+        isOccupied_ = true;
+    }
+    else if(piece == PieceType::Knight){
+        Knight knight = Knight(color,position_);
+        this->piece_ = &knight;
+        isOccupied_ = true;
+    }
+    else if(piece == PieceType::Rook){
+        Rook rook = Rook(color,position_);
+        this->piece_ = &rook;
+        isOccupied_ = true;
+    }
+}
 PiecesAbs* Square::getPieceSquare()
 {
     return piece_;

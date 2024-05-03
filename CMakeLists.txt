@@ -37,6 +37,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         rook.h rook.cpp
         knight.h knight.cpp
         menu.h menu.cpp
+        TypePiece.h
 
     )
 # Define target properties for Android with Qt 6 as:

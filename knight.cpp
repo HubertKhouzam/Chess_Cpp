@@ -4,9 +4,6 @@ Knight::Knight(Color color, Position coordo) : PiecesAbs(color, coordo) {}
 
 Knight::~Knight(){}
 
-const std::string Knight::getPiece() {
-    return "Rook";
-}
 
 bool Knight::acceptedMovement(Position coordo)
 {

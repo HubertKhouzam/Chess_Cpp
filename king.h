@@ -1,5 +1,6 @@
 #pragma once
 #include "pieces.h"
+#include "TypePiece.h"
 
 class King : public piece::PiecesAbs
 {
@@ -11,10 +12,8 @@ public:
     void decrementCountKing();
     int getCountKing();
     virtual bool acceptedMovement(Position caseArrive) override;
-
+    PieceType nomPiece = PieceType::King;
 private:
-    const virtual std::string getPiece() override;
-
 
     static int countKing_;
 };

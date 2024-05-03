@@ -2,6 +2,7 @@
 #include "pieces.h"
 #include "Color.h"
 #include "position.h"
+#include "TypePiece.h"
 
 using namespace piece;
 
@@ -14,6 +15,7 @@ public :
     virtual ~Square();
     Position getPosition() const;
     void setPieceSquare(PiecesAbs* piece);
+    void setPieceSquare(PieceType piece, Color color);
     piece::PiecesAbs* getPieceSquare();
     void setUnoccupiedSquare();
     Color getColor() ;

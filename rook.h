@@ -2,8 +2,9 @@
 #define ROOK_H
 
 #include "pieces.h"
+#include "TypePiece.h"
 
-class Rook: piece::PiecesAbs
+class Rook: public piece::PiecesAbs
 {
 public:
     Rook(Color color, Position coordo);
@@ -11,8 +12,7 @@ public:
     bool acceptedMovement(Position coordo) override;
 
 private:
-    const virtual std::string getPiece() override;
-
+    PieceType nomPiece = PieceType::Rook;
 };
 
 #endif // ROOK_H

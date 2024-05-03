@@ -14,10 +14,6 @@ King::~King() {
     decrementCountKing();
 }
 
-const std::string King::getPiece(){
-    return "King";
-}
-
 
 bool King::acceptedMovement(Position caseArrive){
     if((caseArrive.x >= 0 && caseArrive.x < 8) && (caseArrive.y >= 0 && caseArrive.y < 8)){
