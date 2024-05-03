@@ -216,12 +216,8 @@ Position window::ChessBoard::buttonSelected(int x_, int y_, QPushButton *button)
             previousClickedSquare = nullptr;
         }
         else {
-            QMessageBox msgBox;
-            msgBox.setWindowTitle("Position invalide");
-            msgBox.setText("Hello, this is a pop-up message!");
 
-            // Add buttons to the message box
-            msgBox.addButton(QMessageBox::Ok);
+
         }
 
         clickBoutonCase = 0;

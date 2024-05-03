@@ -12,5 +12,6 @@
         <file>img/W_PAWN.png</file>
         <file>img/W_QUEEN.png</file>
         <file>img/W_ROOK.png</file>
+        <file>img/gameIcon.jpeg</file>
     </qresource>
 </RCC>

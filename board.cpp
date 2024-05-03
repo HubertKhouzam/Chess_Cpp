@@ -1,3 +1,4 @@
+#include <QMessageBox>
 #include "board.h"
 #include "knight.h"
 #include "king.h"
@@ -52,19 +53,37 @@ void Board::updateBoard(Position depart, Position dest){
 bool Board::isMovementAccepted(Position initial, Position destination) {
     PiecesAbs* pieceMoving = getPiece(initial);
     if (!pieceMoving) {
-        std::cout << "No piece at the initial position." << std::endl;
+        QMessageBox msgBox;
+        msgBox.setWindowTitle("Error!");
+        msgBox.setText("Pas de pièce à la case initale");
+        msgBox.setIcon(QMessageBox::Information);
+        // Add buttons to the message box
+        msgBox.addButton(QMessageBox::Ok);
+        msgBox.exec();
         return false;
     }
 
     if(pieceMoving->getPieceColor() != playerTurn_){
-        std::cout << "Not your turn" << std::endl;
+        QMessageBox msgBox;
+        msgBox.setWindowTitle("Error!");
+        msgBox.setText("Pas ton tour!");
+        msgBox.setIcon(QMessageBox::Warning);
+        // Add buttons to the message box
+        msgBox.addButton(QMessageBox::Ok);
+        msgBox.exec();
         return false;
     }
 
     PiecesAbs* pieceDestination = getPiece(destination);
     // Check if the destination square has a piece of the same color
     if (pieceDestination && pieceDestination->getPieceColor() == pieceMoving->getPieceColor()) {
-        std::cout << "Cannot capture your own piece." << std::endl;
+        QMessageBox msgBox;
+        msgBox.setWindowTitle("Error!");
+        msgBox.setText("Ne peut pas capturer une pièce de la même couleur");
+
+        // Add buttons to the message box
+        msgBox.addButton(QMessageBox::Ok);
+        msgBox.exec();
         return false;
     }
 
@@ -75,7 +94,13 @@ bool Board::isMovementAccepted(Position initial, Position destination) {
         changeTurn();
         return true;
     } else {
-        std::cout << "Movement is not valid according to the piece's rules." << std::endl;
+        QMessageBox msgBox;
+        msgBox.setWindowTitle("Error!");
+        msgBox.setText("Mouvement spécifique à la pièce invalide");
+
+        // Add buttons to the message box
+        msgBox.addButton(QMessageBox::Ok);
+        msgBox.exec();
         return false;
     }
 }

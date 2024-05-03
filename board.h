@@ -1,5 +1,6 @@
 #pragma once
 #include "square.h"
+#include <QMessageBox>
 
 class Board
 {
@@ -17,5 +18,6 @@ private:
     static const int dimension = 8;
     Square* board[8][8];
     Color playerTurn_ = Color::White;
+
 };
 

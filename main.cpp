@@ -13,6 +13,10 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+
+    QIcon appIcon(":/img/gameIcon.jpeg");
+    QApplication::setWindowIcon(appIcon);
+
     Menu menu;
     menu.show();
     return a.exec();
