@@ -10,7 +10,7 @@ public:
     Rook(Color color, Position coordo);
     ~Rook();
     bool acceptedMovement(Position coordo) override;
-
+    PieceType getPieceType() const override;
 private:
     PieceType nomPiece = PieceType::Rook;
 };

@@ -13,7 +13,7 @@ public:
 private:
 
     static const int dimension = 8;
-    std::unique_ptr<Square> board[8][8];
+    Square* board[8][8];
 
 };
 

@@ -10,6 +10,8 @@ public:
     Knight(Color color, Position Coordo);
     ~Knight();
     bool acceptedMovement(Position coordo) override;
+    PieceType getPieceType() const override;
+private:
     PieceType nomPiece = PieceType::Knight;
 };
 

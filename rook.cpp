@@ -8,7 +8,9 @@ Rook::Rook(Color color, Position coordo) : PiecesAbs(color, coordo) {
 Rook::~Rook(){
 }
 
-
+PieceType Rook::getPieceType() const {
+    return nomPiece;
+}
 
 bool Rook::acceptedMovement(Position coordo)
 {

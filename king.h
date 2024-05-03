@@ -11,9 +11,10 @@ public:
     void incrementCountKing();
     void decrementCountKing();
     int getCountKing();
-    virtual bool acceptedMovement(Position caseArrive) override;
-    PieceType nomPiece = PieceType::King;
+    bool acceptedMovement(Position caseArrive) override;
+    PieceType getPieceType() const override;
 private:
+    PieceType nomPiece = PieceType::King;
 
     static int countKing_;
 };

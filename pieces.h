@@ -1,6 +1,7 @@
 #pragma once
 #include "position.h"
 #include "Color.h"
+#include "TypePiece.h"
 #include <string>
 #include <iostream>
 
@@ -22,9 +23,9 @@ public:
     // void incrementCountKing();
     // void decrementCountKing();
     // int getCountKing();
-
+    virtual PieceType getPieceType() const = 0;
 private:
-
+    PieceType nomPiece = PieceType::None;
     Color pieceColor_;
     Position piecePosition_;
 };

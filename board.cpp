@@ -15,10 +15,10 @@ Board::Board() {
             pos.x = i;
             pos.y = j;
             if((i+j)% 2 == 0) {
-                board[i][j] = std::make_unique<Square>(Square(Color::White, pos));
+                board[i][j] = new Square(Color::White, pos);
             }
             else {
-                board[i][j] = std::make_unique<Square>(Square(Color::Black, pos));
+                board[i][j] = new Square(Color::Black, pos);
             }
         }
 
@@ -26,7 +26,7 @@ Board::Board() {
 }
 
 Square* Board::getSquare(Position pos) {
-    return board[pos.x][pos.y].get();
+    return board[pos.x][pos.y];
 }
 
 piece::PiecesAbs* Board::getPiece(Position pieceLocationBoard) {
@@ -38,34 +38,25 @@ piece::PiecesAbs* Board::getPiece(Position pieceLocationBoard) {
 
 bool Board::isMovementAccepted(Position initial, Position destination) {
     PiecesAbs* pieceMoving = getPiece(initial);
-    if (pieceMoving == nullptr) {
+    if (!pieceMoving) {
         std::cout << "No piece at the initial position." << std::endl;
         return false;
     }
 
-    if (auto* king = dynamic_cast<King*>(pieceMoving)) {
-        if (king->acceptedMovement(destination)) {
-            std::cout << "Movement is valid." << std::endl;
-            return true;
-        }
-    }
-    else if (auto* rook = dynamic_cast<Rook*>(pieceMoving)) {
-        if (rook->acceptedMovement(destination)) {
-            std::cout << "Movement is valid." << std::endl;
-            return true;
-        }
-    }
-    else if (auto* knight = dynamic_cast<Knight*>(pieceMoving)) {
-        if (knight->acceptedMovement(destination)) {
-            std::cout << "Movement is valid." << std::endl;
-            return true;
-        }
-    }
-    else {
-        std::cout << "Movement is not valid according to the piece's movement rules." << std::endl;
+    PiecesAbs* pieceDestination = getPiece(destination);
+    // Check if the destination square has a piece of the same color
+    if (pieceDestination && pieceDestination->getPieceType() == pieceMoving->getPieceType()) {
+        std::cout << "Cannot capture your own piece." << std::endl;
         return false;
     }
 
-    std::cout << "Not the right piece type." << std::endl;
-    return false;
+    // Use the type-specific acceptedMovement method
+    if (pieceMoving->acceptedMovement(destination)) {
+        std::cout << "Movement is valid." << std::endl;
+        // Optionally update board state here if the move is made
+        return true;
+    } else {
+        std::cout << "Movement is not valid according to the piece's rules." << std::endl;
+        return false;
+    }
 }

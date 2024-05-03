@@ -28,18 +28,18 @@ void Square::setPieceSquare(PiecesAbs* piece)
 
 void Square::setPieceSquare(PieceType piece, Color color){
     if(piece == PieceType::King){
-        King king = King(color,position_);
-        this->piece_ = &king;
+        King* king = new King(color,position_);
+        piece_ = king;
         isOccupied_ = true;
     }
     else if(piece == PieceType::Knight){
-        Knight knight = Knight(color,position_);
-        this->piece_ = &knight;
+        Knight* knight = new Knight(color,position_);
+        piece_ = knight;
         isOccupied_ = true;
     }
     else if(piece == PieceType::Rook){
-        Rook rook = Rook(color,position_);
-        this->piece_ = &rook;
+        Rook* rook = new Rook(color,position_);
+        piece_ = rook;
         isOccupied_ = true;
     }
 }
