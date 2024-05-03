@@ -104,3 +104,71 @@ bool Board::isMovementAccepted(Position initial, Position destination) {
         return false;
     }
 }
+
+bool Board::isChecked(){
+    for(int row = 0; row < dimension; row++){
+        for (int col = 0; col < dimension; col++){
+            Square* currentSquare = board[row][col];
+
+            if (currentSquare->piece_->getPieceType() == PieceType::King){
+                //Couleur du roi
+                Color kingColor = currentSquare->piece_->getPieceColor();
+
+                //Knight checks
+                if ((board[row+2][col+1]->piece_->getPieceType() == PieceType::Knight && board[row+2][col+1]->piece_->getPieceColor() != kingColor) ||
+                    (board[row+2][col-1]->piece_->getPieceType() == PieceType::Knight && board[row+2][col-1]->piece_->getPieceColor() != kingColor) ||
+                    (board[row+1][col+2]->piece_->getPieceType() == PieceType::Knight && board[row+1][col+2]->piece_->getPieceColor() != kingColor) ||
+                    (board[row+1][col-2]->piece_->getPieceType() == PieceType::Knight && board[row+1][col-2]->piece_->getPieceColor() != kingColor) ||
+                    (board[row-1][col+2]->piece_->getPieceType() == PieceType::Knight && board[row-1][col+2]->piece_->getPieceColor() != kingColor) ||
+                    (board[row-1][col-2]->piece_->getPieceType() == PieceType::Knight && board[row-1][col-2]->piece_->getPieceColor() != kingColor) ||
+                    (board[row-2][col+1]->piece_->getPieceType() == PieceType::Knight && board[row-2][col+1]->piece_->getPieceColor() != kingColor) ||
+                    (board[row-2][col-1]->piece_->getPieceType() == PieceType::Knight && board[row-2][col-1]->piece_->getPieceColor() != kingColor)){
+                    return true;
+                }
+
+                //rook checks
+                //top_direction
+                for (int kingRow = row; kingRow>=0; kingRow--){
+                    if ((board[kingRow][col]->piece_->getPieceType() != PieceType::Rook) || (board[kingRow][col]->piece_->getPieceColor() == kingColor)){
+                        break;
+                    }
+                    if ((board[kingRow][col]->piece_->getPieceType() == PieceType::Rook) && (board[kingRow][col]->piece_->getPieceColor() != kingColor)){
+                        return true;
+                    }
+                }
+                //bottom_direction
+                for (int kingRow = row; kingRow<dimension; kingRow++){
+                    if ((board[kingRow][col]->piece_->getPieceType() != PieceType::Rook) || (board[kingRow][col]->piece_->getPieceColor() == kingColor)){
+                        break;
+                    }
+                    if ((board[kingRow][col]->piece_->getPieceType() == PieceType::Rook) && (board[kingRow][col]->piece_->getPieceColor() != kingColor)){
+                        return true;
+                    }
+                }
+                //left_direction
+                for (int kingCol = col; kingCol>=0; kingCol--){
+                    if ((board[row][kingCol]->piece_->getPieceType() != PieceType::Rook) || (board[kingCol][col]->piece_->getPieceColor() == kingColor)){
+                        break;
+                    }
+                    if ((board[row][kingCol]->piece_->getPieceType() == PieceType::Rook) && (board[kingCol][col]->piece_->getPieceColor() != kingColor)){
+                        return true;
+                    }
+                }
+                //right_direction
+                for (int kingCol = col; kingCol<8; kingCol++){
+                    if ((board[row][kingCol]->piece_->getPieceType() != PieceType::Rook) || (board[kingCol][col]->piece_->getPieceColor() == kingColor)){
+                        break;
+                    }
+                    if ((board[row][kingCol]->piece_->getPieceType() == PieceType::Rook) && (board[kingCol][col]->piece_->getPieceColor() != kingColor)){
+                        return true;
+                    }
+                }
+
+
+
+            }
+
+        }
+    }
+    return false;
+}

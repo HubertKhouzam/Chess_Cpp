@@ -24,6 +24,7 @@ public:
     // void decrementCountKing();
     // int getCountKing();
     virtual PieceType getPieceType() const = 0;
+
 private:
     PieceType nomPiece = PieceType::None;
     Color pieceColor_;

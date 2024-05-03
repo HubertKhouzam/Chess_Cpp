@@ -10,8 +10,12 @@ public:
     bool isMovementAccepted(Position initial, Position destination);
     piece::PiecesAbs* getPiece(Position pieceLocationBoard);
     Square* getSquare(Position pos);
+<<<<<<< Updated upstream
     void updateBoard(Position depart, Position dest);
     void changeTurn();
+=======
+    bool isChecked();
+>>>>>>> Stashed changes
 
 private:
 
