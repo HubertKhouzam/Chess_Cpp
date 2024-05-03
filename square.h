@@ -17,7 +17,7 @@ public :
     piece::PiecesAbs* getPieceSquare();
     void setUnoccupiedSquare();
     Color getColor() ;
-    PiecesAbs* piece_;
+    PiecesAbs* piece_ = nullptr;
 
 private :
     Position position_;

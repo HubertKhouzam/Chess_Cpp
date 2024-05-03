@@ -1,4 +1,7 @@
 #include "board.h"
+#include "knight.h"
+#include "king.h"
+#include "rook.h"
 
 using namespace piece;
 
@@ -26,16 +29,20 @@ std::unique_ptr<Square>* Board::getSquare(Position pos) {
     return &board[pos.x][pos.y];
 }
 
-PiecesAbs* Board::getPiece(Position pieceLocationBoard) {
+piece::PiecesAbs* Board::getPiece(Position pieceLocationBoard) {
     return board[pieceLocationBoard.x][pieceLocationBoard.y]->getPieceSquare();
 }
 
 bool Board::isMovementAccepted(Position initial, Position destination) {
+
     PiecesAbs* pieceMoving = getPiece(initial);
     PiecesAbs* pieceDestination = getPiece(destination);
 
-    if ( pieceDestination->isMovementAccepted(destination) && (pieceDestination->getPieceColor() != pieceMoving->getPieceColor() || pieceDestination == nullptr)) {
-        pieceMoving->setPosition(destination);
+    if ((pieceDestination == nullptr || (pieceDestination->getPieceColor() != pieceMoving->getPieceColor())) && pieceMoving->acceptedMovement(destination)) {
+
+        std::cout << "yes1" << std::endl;
+        //pieceMoving->setPosition(destination);
+        std::cout << "yes2" << std::endl;
         return true;
     }
     else

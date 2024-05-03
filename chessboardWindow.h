@@ -8,6 +8,8 @@
 #include <QPixmap>
 #include <QIcon>
 #include "position.h"
+#include "board.h"
+#include "pieces.h"
 
 namespace window{
 
@@ -15,7 +17,7 @@ class ChessBoard : public QMainWindow
 {
     Q_OBJECT;
 public:
-    ChessBoard(QWidget* parent = nullptr);
+    ChessBoard(const std::string &position, QWidget* parent = nullptr);
     ~ChessBoard() override = default;
 
 public slots:
@@ -27,9 +29,10 @@ private:
     template <typename T = decltype(nullptr)>
     QPushButton* newButton(int i, int j);
 
-
+    Board gameBoard_;
     Position position_;
     QPushButton** chessBoard;
+    Position previousPosition;
     QPushButton* previousClickedSquare = nullptr;
     QIcon icone_;
     int clickBoutonPiece = 0;

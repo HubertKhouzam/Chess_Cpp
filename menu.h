@@ -11,7 +11,7 @@ public:
     ~Menu() override;         //Override non necessaire
 
 private slots:
-    void positionSelected(const QString &position);
+    void positionSelected(const std::string &position);
 };
 
 #endif // MENU_H

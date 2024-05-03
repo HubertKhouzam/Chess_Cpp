@@ -1,7 +1,7 @@
 #pragma once
 #include "pieces.h"
 
-class King : piece::PiecesAbs
+class King : public piece::PiecesAbs
 {
 public:
     King(Color color, Position coordinates);
@@ -10,10 +10,11 @@ public:
     void incrementCountKing();
     void decrementCountKing();
     int getCountKing();
+    virtual bool acceptedMovement(Position caseArrive) override;
 
 private:
     const virtual std::string getPiece() override;
-    bool acceptedMovement(Position caseArrive) override;
+
 
     static int countKing_;
 };

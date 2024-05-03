@@ -17,12 +17,12 @@ Position piece::PiecesAbs::getPiecePosition() const {
 }
 
 bool piece::PiecesAbs::isMovementAccepted(Position coordonates) {
-    return acceptedMovement(coordonates);
+    //return acceptedMovement(coordonates);
+    return true;
 }
 
 void piece::PiecesAbs::setPosition(Position coordo)
 {
     piecePosition_ = coordo;
-
 }
 

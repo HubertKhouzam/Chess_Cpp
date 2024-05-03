@@ -19,13 +19,13 @@ public:
     const virtual std::string getPiece() = 0 ;
     bool isMovementAccepted (Position coordonates);
     bool isCaptured = false;
-
+    virtual bool acceptedMovement(Position caseArrive)= 0;
     // void incrementCountKing();
     // void decrementCountKing();
     // int getCountKing();
 
 private:
-    virtual bool acceptedMovement(Position caseArrive)= 0;
+
     Color pieceColor_;
     Position piecePosition_;
 };

@@ -8,10 +8,11 @@ class Rook: piece::PiecesAbs
 public:
     Rook(Color color, Position coordo);
     ~Rook();
+    bool acceptedMovement(Position coordo) override;
 
 private:
     const virtual std::string getPiece() override;
-    bool acceptedMovement(Position coordo) override;
+
 };
 
 #endif // ROOK_H

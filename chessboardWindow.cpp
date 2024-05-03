@@ -8,6 +8,8 @@
 #include <QVariant>
 #include <QMenu>
 #include <QMenuBar>
+#include <QApplication>
+#include <QMessageBox>
 #pragma pop()
 #pragma pop()
 
@@ -28,7 +30,7 @@ QPushButton *window::ChessBoard::newButton(int i, int j)
     return button;
 }
 
-window::ChessBoard::ChessBoard(QWidget *parent) : QMainWindow(parent)
+window::ChessBoard::ChessBoard(const std::string &position, QWidget *parent) : QMainWindow(parent)
 {
     auto widgetPrincipal = new QWidget(this);
     auto layoutPrincipal = new QVBoxLayout(widgetPrincipal);
@@ -54,8 +56,90 @@ window::ChessBoard::ChessBoard(QWidget *parent) : QMainWindow(parent)
         }
     }
 
-    chessBoard[3][6].setIcon(whiteKingPng);
-    chessBoard[3][6].setIconSize(QSize(80, 80));
+    if(position=="Classique"){
+    //whitePiece
+        chessBoard[7][7].setIcon(whiteRookPng);
+        chessBoard[7][7].setIconSize(QSize(80,80));
+
+        chessBoard[7][0].setIcon(whiteRookPng);
+        chessBoard[7][0].setIconSize(QSize(80,80));
+
+        chessBoard[7][4].setIcon(whiteKingPng);
+        chessBoard[7][4].setIconSize(QSize(80,80));
+
+        chessBoard[7][6].setIcon(whiteKnightPng);
+        chessBoard[7][6].setIconSize(QSize(80,80));
+
+        chessBoard[7][1].setIcon(whiteKnightPng);
+        chessBoard[7][1].setIconSize(QSize(80,80));
+
+    //BlackPiece
+        chessBoard[0][7].setIcon(blackRookPng);
+        chessBoard[0][7].setIconSize(QSize(80,80));
+
+        chessBoard[0][0].setIcon(blackRookPng);
+        chessBoard[0][0].setIconSize(QSize(80,80));
+
+        chessBoard[0][4].setIcon(blackKingPng);
+        chessBoard[0][4].setIconSize(QSize(80,80));
+
+        chessBoard[0][6].setIcon(blackKnightPng);
+        chessBoard[0][6].setIconSize(QSize(80,80));
+
+        chessBoard[0][1].setIcon(blackKnightPng);
+        chessBoard[0][1].setIconSize(QSize(80,80));
+    }
+    else if (position=="Position 2"){
+        //whitePiece
+        chessBoard[2][3].setIcon(whiteRookPng);
+        chessBoard[2][3].setIconSize(QSize(80,80));
+
+        chessBoard[2][4].setIcon(whiteKingPng);
+        chessBoard[2][4].setIconSize(QSize(80,80));
+
+        chessBoard[3][3].setIcon(whiteKnightPng);
+        chessBoard[3][3].setIconSize(QSize(80,80));
+
+
+        //BlackPiece
+
+        chessBoard[5][5].setIcon(blackKingPng);
+        chessBoard[5][5].setIconSize(QSize(80,80));
+
+        chessBoard[4][4].setIcon(blackKnightPng);
+        chessBoard[4][4].setIconSize(QSize(80,80));
+    }
+
+    else if (position=="Position 3"){
+
+        //whitePiece
+        chessBoard[2][3].setIcon(whiteKnightPng);
+        chessBoard[2][3].setIconSize(QSize(80,80));
+
+        chessBoard[2][4].setIcon(whiteKingPng);
+        chessBoard[2][4].setIconSize(QSize(80,80));
+
+        chessBoard[3][4].setIcon(whiteKnightPng);
+        chessBoard[3][4].setIconSize(QSize(80,80));
+
+        chessBoard[1][3].setIcon(whiteKnightPng);
+        chessBoard[1][3].setIconSize(QSize(80,80));
+
+        chessBoard[3][7].setIcon(whiteKnightPng);
+        chessBoard[3][7].setIconSize(QSize(80,80));
+
+        chessBoard[3][5].setIcon(whiteKnightPng);
+        chessBoard[3][5].setIconSize(QSize(80,80));
+
+        //BlackPiece
+
+        chessBoard[0][0].setIcon(blackKingPng);
+        chessBoard[0][0].setIconSize(QSize(80,80));
+
+        chessBoard[4][4].setIcon(blackRookPng);
+        chessBoard[4][4].setIconSize(QSize(80,80));
+
+    }
 
 
     widgetPrincipal->setLayout(layoutPrincipal);
@@ -76,17 +160,33 @@ Position window::ChessBoard::buttonSelected(int x_, int y_, QPushButton *button)
 {
     Position pos {x_, y_};
 
-    if (clickBoutonCase == 1 && button->icon().isNull()) { // a changer condition
+    //gameBoard_.getSquare(previousPosition)
 
-        previousClickedSquare->setIcon(QIcon());
-        button->setIcon(icone_);
-        button->setIconSize(QSize(80,80));
-        previousClickedSquare = nullptr;
+    if (clickBoutonCase == 1 && button->icon().isNull()) { // a changer condition
+        std::cout<<"yoho"<<std::endl;
+        if (gameBoard_.isMovementAccepted(previousPosition,pos)){
+            std::cout<<"yoho"<<std::endl;
+            previousClickedSquare->setIcon(QIcon());  //second click, drop piece
+            button->setIcon(icone_);
+            button->setIconSize(QSize(80,80));
+            previousClickedSquare = nullptr;
+        }
+        else {
+            QMessageBox msgBox;
+            msgBox.setWindowTitle("Position invalide");
+            msgBox.setText("Hello, this is a pop-up message!");
+
+            // Add buttons to the message box
+            msgBox.addButton(QMessageBox::Ok);
+        }
+
         clickBoutonCase = 0;
-    } else if (!button->icon().isNull()) {
+    } else if (!button->icon().isNull()) {    //first click, select piece
         icone_ = button->icon();
         previousClickedSquare = button;
         clickBoutonCase = 1;
+        previousPosition = pos;
+
     }
 
     return pos;

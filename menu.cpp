@@ -4,6 +4,7 @@
 #include <QVBoxLayout>
 #include <QPushButton>
 #include <Qlabel>
+#include "chessboardWindow.h"
 
 Menu::Menu(QWidget *parent): QMainWindow(parent)
 {
@@ -13,15 +14,15 @@ Menu::Menu(QWidget *parent): QMainWindow(parent)
     messageLabel->setAlignment(Qt::AlignCenter);
     layoutPrincipal->addWidget(messageLabel);
 
-    QPushButton *buttonPosition1 = new QPushButton("Classique");
+    QPushButton *buttonClassique = new QPushButton("Classique");
     QPushButton *buttonPosition2 = new QPushButton("Position 2");
     QPushButton *buttonPosition3 = new QPushButton("Position 3");
 
-    connect(buttonPosition1, &QPushButton::clicked, this, [this]() { positionSelected("Classique"); });
+    connect(buttonClassique, &QPushButton::clicked, this, [this]() { positionSelected("Classique"); });
     connect(buttonPosition2, &QPushButton::clicked, this, [this]() { positionSelected("Position 2"); });
     connect(buttonPosition3, &QPushButton::clicked, this, [this]() { positionSelected("Position 3"); });
 
-    layoutPrincipal->addWidget(buttonPosition1);
+    layoutPrincipal->addWidget(buttonClassique);
     layoutPrincipal->addWidget(buttonPosition2);
     layoutPrincipal->addWidget(buttonPosition3);
 
@@ -39,7 +40,10 @@ Menu::Menu(QWidget *parent): QMainWindow(parent)
 
 Menu::~Menu(){}
 
-void Menu::positionSelected(const QString &position)
+void Menu::positionSelected(const std::string &position)
 {
 
+    window::ChessBoard*  w = new window::ChessBoard(position);
+    w->show();
+    this->close();
 }
