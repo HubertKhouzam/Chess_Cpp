@@ -42,53 +42,30 @@ bool Board::isMovementAccepted(Position initial, Position destination) {
         std::cout << "No piece at the initial position." << std::endl;
         return false;
     }
-    else if(dynamic_cast<King*>(pieceMoving) != nullptr){
-        King* pieceMovingType = dynamic_cast<King*>(pieceMoving);
-        if (pieceMovingType->acceptedMovement(destination)) {
+
+    if (auto* king = dynamic_cast<King*>(pieceMoving)) {
+        if (king->acceptedMovement(destination)) {
             std::cout << "Movement is valid." << std::endl;
-            // pieceMoving->setPosition(destination);
             return true;
-        } else {
-            std::cout << "Movement is not valid according to the piece's movement rules." << std::endl;
-            return false;
         }
     }
-    else if(dynamic_cast<Rook*>(pieceMoving)){
-        Rook* pieceMovingType = dynamic_cast<Rook*>(pieceMoving);
-        if (pieceMovingType->acceptedMovement(destination)) {
+    else if (auto* rook = dynamic_cast<Rook*>(pieceMoving)) {
+        if (rook->acceptedMovement(destination)) {
             std::cout << "Movement is valid." << std::endl;
-            // pieceMoving->setPosition(destination);
             return true;
-        } else {
-            std::cout << "Movement is not valid according to the piece's movement rules." << std::endl;
-            return false;
         }
     }
-    else if(dynamic_cast<Knight*>(pieceMoving)){
-        Knight* pieceMovingType = dynamic_cast<Knight*>(pieceMoving);
-        if (pieceMovingType->acceptedMovement(destination)) {
+    else if (auto* knight = dynamic_cast<Knight*>(pieceMoving)) {
+        if (knight->acceptedMovement(destination)) {
             std::cout << "Movement is valid." << std::endl;
-            // pieceMoving->setPosition(destination);
             return true;
-        } else {
-            std::cout << "Movement is not valid according to the piece's movement rules." << std::endl;
-            return false;
         }
     }
-    else{
-        std::cout << "Not the right piece type" << std::endl;
+    else {
+        std::cout << "Movement is not valid according to the piece's movement rules." << std::endl;
         return false;
     }
 
-    std::cout << "Passé premier test" << std::endl;
-    PiecesAbs* pieceDestination = getPiece(destination);
-    // Vérifier si la destination est occupée par une pièce de la même couleur
-    if (pieceDestination != nullptr && pieceDestination->getPieceColor() == pieceMoving->getPieceColor()) {
-        std::cout << "Cannot move to a square occupied by a piece of the same color." << std::endl;
-        return false;
-    }
-    std::cout << "Passé deuxieme test" << std::endl;
-    // Vérifier si le mouvement est accepté selon les règles de la pièce
-
-    std::cout << "Passé troisieme test" << std::endl;
+    std::cout << "Not the right piece type." << std::endl;
+    return false;
 }
