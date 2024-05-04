@@ -214,12 +214,11 @@ Position window::ChessBoard::buttonSelected(int x_, int y_, QPushButton *button)
             button->setIcon(icone_);
             button->setIconSize(QSize(80,80));
             previousClickedSquare = nullptr;
-        }
-        else {
-
 
         }
-
+        for(int i = 0;i<listPossibleMovements_.size();i++){
+            chessBoard[listPossibleMovements_[i].x][listPossibleMovements_[i].y].setStyleSheet((listPossibleMovements_[i].x + listPossibleMovements_[i].y) % 2 == 0 ? "background-color: white;" : "background-color: grey;");
+        }
         clickBoutonCase = 0;
     } else if (!button->icon().isNull()) {    //first click, select piece
         icone_ = button->icon();

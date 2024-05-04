@@ -56,7 +56,7 @@ bool Board::isMovementAccepted(Position initial, Position destination) {
         QMessageBox msgBox;
         msgBox.setWindowTitle("Error!");
         msgBox.setText("Pas de pièce à la case initale");
-        msgBox.setIcon(QMessageBox::Information);
+        msgBox.setIcon(QMessageBox::Warning);
         // Add buttons to the message box
         msgBox.addButton(QMessageBox::Ok);
         msgBox.exec();
@@ -136,7 +136,7 @@ bool Board::verifIsMovementAccepted(Position initial, Position destination){
     }
 
     // Use the type-specific acceptedMovement method
-    if (pieceMoving->acceptedMovement(destination)) {
+    if (pieceMoving->accepatedMovement(destination)) {
         if(/*!isChecked(playerTurn_)*/true)
         {
             return true;
@@ -310,7 +310,7 @@ std::vector<Position> Board::possibleMovements(Position realPos){
         int y = realPos.y;
         for (int j = 0; j < dimension; j++){
             if (verifIsMovementAccepted(realPos, {j, y})){
-                Position pos = {x, j};
+                Position pos = {j, y};
                 listOfPos.push_back(pos);
             }
         }

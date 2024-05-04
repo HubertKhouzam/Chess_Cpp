@@ -11,7 +11,6 @@ public:
     bool verifIsMovementAccepted(Position initial, Position destination);
     piece::PiecesAbs* getPiece(Position pieceLocationBoard);
     Square* getSquare(Position pos);
-
     void updateBoard(Position depart, Position dest);
     void changeTurn();
     bool isInBounds(int row, int col);
