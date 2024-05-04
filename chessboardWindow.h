@@ -37,6 +37,7 @@ private:
     QIcon icone_;
     int clickBoutonPiece = 0;
     int clickBoutonCase = 0;
+    std::vector<Position> listPossibleMovements_;        //VICTOR###############
 
     const QIcon whiteKnightPng = QIcon(":/img/W_KNIGHT.png");
     const QIcon whiteRookPng = QIcon (":/img/W_ROOK.png");

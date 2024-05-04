@@ -226,7 +226,12 @@ Position window::ChessBoard::buttonSelected(int x_, int y_, QPushButton *button)
         previousClickedSquare = button;
         clickBoutonCase = 1;
         previousPosition = pos;
-
+        //################################################
+        listPossibleMovements_ = gameBoard_.possibleMovements(pos);
+        for (int i=0; i<listPossibleMovements_.size(); i++){
+            chessBoard[listPossibleMovements_[i].x][listPossibleMovements_[i].y].setStyleSheet("background-color: green;");
+        }
+                //###############################################
     }
 
     return pos;
