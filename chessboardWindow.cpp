@@ -1,5 +1,7 @@
 #include "chessboardWindow.h"
 #include "TypePiece.h"
+#include "king.h"
+#include "menu.h"
 #pragma warning(push, 0)
 #include <QGridLayout>
 #include <QPushButton>
@@ -37,7 +39,7 @@ window::ChessBoard::ChessBoard(const std::string &position, QWidget *parent) : Q
     auto layoutPrincipal = new QVBoxLayout(widgetPrincipal);
 
     auto layout = new QGridLayout();
-    layout->setSpacing(0); // Réduit l'espace entre les boutons à 0
+    layout->setSpacing(0);
     layoutPrincipal->addLayout(layout);
 
     chessBoard = new QPushButton*[8];
@@ -206,14 +208,28 @@ Position window::ChessBoard::buttonSelected(int x_, int y_, QPushButton *button)
 {
     Position pos {x_, y_};
 
-    //gameBoard_.getSquare(previousPosition)
 
-    if (clickBoutonCase == 1 ) { // a changer condition
+    if (clickBoutonCase == 1 ) {
         if (gameBoard_.isMovementAccepted(previousPosition,pos)){
             previousClickedSquare->setIcon(QIcon());  //second click, drop piece
             button->setIcon(icone_);
             button->setIconSize(QSize(80,80));
             previousClickedSquare = nullptr;
+            if(gameBoard_.deletedPiece == PieceType::King){
+                King::resetCountKing();
+                QMessageBox msgBox;
+                msgBox.setWindowTitle("Félicitations!");
+                msgBox.setText("Fin de la partie");
+
+                msgBox.addButton(QMessageBox::Ok);
+                int result = msgBox.exec();
+
+                if (result == QMessageBox::Ok) {
+
+                    this->close();
+
+                }
+            }
 
         }
         for(int i = 0;i<listPossibleMovements_.size();i++){
@@ -225,12 +241,10 @@ Position window::ChessBoard::buttonSelected(int x_, int y_, QPushButton *button)
         previousClickedSquare = button;
         clickBoutonCase = 1;
         previousPosition = pos;
-        //################################################
         listPossibleMovements_ = gameBoard_.possibleMovements(pos);
         for (int i=0; i<listPossibleMovements_.size(); i++){
             chessBoard[listPossibleMovements_[i].x][listPossibleMovements_[i].y].setStyleSheet("background-color: green;");
         }
-                //###############################################
     }
 
     return pos;
@@ -241,5 +255,4 @@ void window::ChessBoard::pieceSelected(QPushButton *button)
     clickBoutonPiece = 1;
     clickBoutonCase = 0;
     icone_ = button->icon();
-    // return button;
 }

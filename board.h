@@ -1,6 +1,7 @@
 #pragma once
 #include "square.h"
 #include <QMessageBox>
+#include "pieces.h"
 
 class Board
 {
@@ -16,6 +17,7 @@ public:
     bool isInBounds(int row, int col);
     bool isChecked(Color kingColor);
     std::vector<Position> possibleMovements(Position realPos);
+    PieceType deletedPiece = PieceType::None;
 
 
 

@@ -45,5 +45,5 @@ void Menu::positionSelected(const std::string &position)
 
     window::ChessBoard*  w = new window::ChessBoard(position);
     w->show();
-    this->close();
+
 }

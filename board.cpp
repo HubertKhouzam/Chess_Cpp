@@ -45,6 +45,9 @@ void Board::changeTurn(){
 void Board::updateBoard(Position depart, Position dest){
     Square* destination = getSquare(dest);
     PiecesAbs* initial = getSquare(depart)->getPieceSquare();
+    if(destination->getPieceSquare() != nullptr){
+        deletedPiece = destination->getPieceSquare()->getPieceType();
+    }
     destination->setUnoccupiedSquare();
     destination->setPieceSquare(initial);
     getSquare(depart)->setUnoccupiedSquare();
@@ -57,7 +60,7 @@ bool Board::isMovementAccepted(Position initial, Position destination) {
         msgBox.setWindowTitle("Error!");
         msgBox.setText("Pas de pièce à la case initale");
         msgBox.setIcon(QMessageBox::Warning);
-        // Add buttons to the message box
+
         msgBox.addButton(QMessageBox::Ok);
         msgBox.exec();
         return false;
@@ -68,29 +71,27 @@ bool Board::isMovementAccepted(Position initial, Position destination) {
         msgBox.setWindowTitle("Error!");
         msgBox.setText("Pas ton tour!");
         msgBox.setIcon(QMessageBox::Warning);
-        // Add buttons to the message box
+
         msgBox.addButton(QMessageBox::Ok);
         msgBox.exec();
         return false;
     }
 
     PiecesAbs* pieceDestination = getPiece(destination);
-    // Check if the destination square has a piece of the same color
     if (pieceDestination && pieceDestination->getPieceColor() == pieceMoving->getPieceColor()) {
         QMessageBox msgBox;
         msgBox.setWindowTitle("Error!");
         msgBox.setText("Ne peut pas capturer une pièce de la même couleur");
 
-        // Add buttons to the message box
         msgBox.addButton(QMessageBox::Ok);
         msgBox.exec();
         return false;
     }
 
-    // Use the type-specific acceptedMovement method
+
     if (pieceMoving->acceptedMovement(destination)) {
         std::cout << "Movement is valid." << std::endl;
-        if(/*!isChecked(playerTurn_)*/true)
+        if(/*!isChecked(playerTurn_)*/true) // Fonction isChecked incomplète
         {
         updateBoard(initial,destination);
         changeTurn();
@@ -101,7 +102,7 @@ bool Board::isMovementAccepted(Position initial, Position destination) {
             msgBox.setWindowTitle("Error!");
             msgBox.setText("Joueur est toujours en echec");
 
-            // Add buttons to the message box
+
             msgBox.addButton(QMessageBox::Ok);
             msgBox.exec();
             return false;
@@ -111,7 +112,7 @@ bool Board::isMovementAccepted(Position initial, Position destination) {
         msgBox.setWindowTitle("Error!");
         msgBox.setText("Mouvement spécifique à la pièce invalide");
 
-        // Add buttons to the message box
+
         msgBox.addButton(QMessageBox::Ok);
         msgBox.exec();
         return false;
@@ -120,23 +121,19 @@ bool Board::isMovementAccepted(Position initial, Position destination) {
 
 bool Board::verifIsMovementAccepted(Position initial, Position destination){
     PiecesAbs* pieceMoving = getPiece(initial);
-    //##################################################
     if (!isInBounds(destination.x, destination.y)){
         return false;
     }
-    //##################################################
     if (!pieceMoving) {
         return false;
     }
 
     PiecesAbs* pieceDestination = getPiece(destination);
-    // Check if the destination square has a piece of the same color
     if (pieceDestination && pieceDestination->getPieceColor() == pieceMoving->getPieceColor()) {
         return false;
     }
 
-    // Use the type-specific acceptedMovement method
-    if (pieceMoving->accepatedMovement(destination)) {
+    if (pieceMoving->acceptedMovement(destination)) {
         if(/*!isChecked(playerTurn_)*/true)
         {
             return true;
@@ -226,7 +223,7 @@ bool Board::isChecked(Color kingColor){
     return false;
 }
 
-//VICTOR######################################
+
 std::vector<Position> Board::possibleMovements(Position realPos){
     PieceType piece = getSquare(realPos)->getPieceSquare()->getPieceType();
     std::vector<Position> listOfPos;
@@ -317,4 +314,4 @@ std::vector<Position> Board::possibleMovements(Position realPos){
     }
     return listOfPos;
 }
-//###################################
+
